@@ -1,7 +1,7 @@
 from flask import render_template
-from . import main
+from . import auth
+from app.models import User
 
-
-@main.route('/')
+@auth.route('/')
 def index():
     return "Welcome"
