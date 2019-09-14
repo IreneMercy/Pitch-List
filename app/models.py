@@ -8,6 +8,9 @@ class User(UserMixin,db.Model):
     username = db.Column(db.String(255),nullable=False,unique=True)
     email = db.Column(db.String(255),nullable=True,unique=True)
     password = db.Column(db.String(255),nullable=False)
+    bio = db.Column(db.String(255))
+    profile_pic_path = db.Column(db.String())
+    
 
     def save(self):
         db.session.add(self)
@@ -26,7 +29,7 @@ class User(UserMixin,db.Model):
 
     def __repr__(self):
         return f'User{self.username}'
-        
+
     @loginmanager.user_loader
     def user_loader(user_id):
         return User.query.get(user_id)
