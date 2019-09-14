@@ -38,3 +38,11 @@ text-transform: uppercase;
   margin-top:4%;
   color:white;
 }
+.items{
+  font-family: georgia;
+  margin-top:5%;
+}
+.profile{
+  margin-top:10%;
+  font-family: georgia;
+}
