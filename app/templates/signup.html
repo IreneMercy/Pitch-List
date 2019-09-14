@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  {{super()}}
+  <form action="/signup" method="POST">
+    {% if error %}
+      <p class="alert-alert-danger text-center mt-2 bg-danger">
+        {{error}}
+      </p>
+    {% endif %}
+  <div class="container text-center">
+    <h1 class="mt-5">Sign Up</h1>
+    <p>Please fill in this form to create an account.</p>
+    <hr>
+
+    <input size="60cl" type="text" placeholder="Enter Username" name="username" required>
+    <br>
+    <br>
+    <input size="60cl" type="text" placeholder="Enter Email" name="email" required>
+    <br>
+    <br>
+    <input size="60cl" type="password" placeholder="Enter Password" name="password" required>
+    <br>
+    <br>
+    <input size="60cl" type="password" placeholder="ConfirmPassword" name="confirm_password" required>
+    <br>
+    <button type="submit" class="signupbtn btn-btn-lg bg-success mt-5 w-50 text-white">Sign Up</button>
+  </div>
+</form>
+{% endblock %}
