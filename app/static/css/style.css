@@ -7,12 +7,12 @@
   padding-top: 12%;
 }
 .login h1{
-  color:white;
+  color:orange;
   font-family: georgia;
   text-transform: uppercase;
 }
 .login p{
-  color: white;
+  color: wheat;
   font-family: georgia;
   font-size: 18px;
 }
@@ -20,8 +20,21 @@
   background-color: transparent;
   border-radius:10px;
   border:1px solid orange;
-  height:7%;
+  height:25%;
   color:white;
+  color:white;
+}
+.login a{
+  text-decoration-line: none;
+}
+::placeholder{
+  color:wheat;
+  font-size: 14px;
+  margin-left:5%;
+}
+#signup{
+  text-decoration-line: none;
+  color:aqua;
 }
 #submit{
 height:7%;
