@@ -2,31 +2,40 @@
 
 {% block content %}
   {{super()}}
-    <div class="container-fluid">
-      <form action="/signup" method="POST">
-        {% if error %}
-          <p class="alert-alert-danger text-center mt-2 bg-danger">
-            {{error}}
-          </p>
-        {% endif %}
-      <div class="container text-center login">
-        <h1>Sign Up</h1>
-        <p>Please fill in this form to create an account.</p>
-        <hr>
-
-        <input size="60cl" type="text" placeholder="Enter Username" name="username" required>
-        <br>
-        <br>
-        <input size="60cl" type="text" placeholder="Enter Email" name="email" required>
-        <br>
-        <br>
-        <input size="60cl" type="password" placeholder="Enter Password" name="password" required>
-        <br>
-        <br>
-        <input size="60cl" type="password" placeholder="ConfirmPassword" name="confirm_password" required>
-        <br>
-        <button type="submit" class="btn btn-btn-lg bg-warning mt-5 w-50 text-white" id="submit">Sign Up</button>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-4">
       </div>
-    </form>
+      <div class="col-md-4">
+        <form class="login mt-5 pt-5" action="/login" method="POST">
+          <div class="card bg-dark text-center ">
+            <div class="card-header">
+              {% if error %}
+                <p class="alert-alert-danger text-center  bg-danger error">
+                  {{error}}
+                </p>
+              {% endif %}
+            </div>
+            <div class="card-body">
+              <h1 class="mt-5">Signup</h1>
+              <p class="text">Please fill in this form to create an account.</p>
+              <input class="border-outline-warning" size="30cl" type="text" placeholder="Enter Username" name="username" required>
+              <br>
+              <br>
+              <input class="border-outline-warning" size="30cl" type="text" placeholder="Enter Email" name="email" required>
+              <br>
+              <br>
+              <input size="30cl" type="password" placeholder="Enter Password" name="password" required>
+              <br>
+              <br>
+              <input class="border-outline-warning" size="30cl" type="text" placeholder="Confirm Password" name="confirm_password" required>
+            </div>
+            <div class="card-footer">
+              <button type="submit" class=" btn btn-btn-lg bg-warning mt-5 w-50 text-white" id="submit">Signup</button>
+            </div>
+          </div>
+      </form>
+      </div>
     </div>
+  </div>
 {% endblock %}
