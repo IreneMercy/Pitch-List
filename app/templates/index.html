@@ -1,24 +1,28 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <div class="container-fluid">
-    <div class="container welcome">
-      <h3 class="text-center mt-5 text-white">Welcome</h3>
-      <div class="row">
-        <div class="col-md-6">
-          <div class="card">
-            <div class="card-header">
-              <h2>Firs Pitch</h2>
-            </div>
-            <div class="card-body">
-              <p>Pitch content</p>
-            </div>
-            <div class="card-footer">
-              <p>Posted on <span>Author</span></p>
-            </div>
-          </div>
+  {{super()}}
+  <div class="container pitch_post">
+    <div class="row">
+  {% for post in posts %}
+    <div class="col-md-4 mt-4 pt-4">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="article-metadata">{{post.category}}</h3>
+          <h3 class="article-metadata">{{post.title}}</h3>
+        </div>
+        <div class="card-body">
+          <p>{{post.content}}</p>
+          <p>Posted on {{post.date_posted.strftime('%Y-%m-%d')}} ~<span>{{post.author.username}}</span></p>
+        </div>
+        <div class="card-footer">
+          <form class="" action="{{url_for('main.del_post', post_id = post.id)}}" method="post">
+            <input type="submit" class="btn btn-danger" value="Delete">
+          </form>
         </div>
       </div>
     </div>
-  </div>
+  {% endfor %}
+</div>
+</div>
 {% endblock %}

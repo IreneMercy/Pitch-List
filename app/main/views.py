@@ -1,14 +1,15 @@
 from flask import render_template, request,redirect,url_for,abort,flash
-from ..models import User
+from ..models import User, Post
 from . import main
-from flask_login import login_required
+from flask_login import login_required, current_user,logout_user
 from .. import db
 from .forms import UpdateProfile, PostPitch
 
 @main.route('/')
 @login_required
 def index():
-    return render_template('index.html')
+    posts = Post.query.all()
+    return render_template('index.html',posts = posts)
 
 
 @main.route('/user<uname>')
@@ -39,9 +40,19 @@ def update_profile(uname):
 def new_post():
     form = PostPitch()
     if form.validate_on_submit():
-        posts = PostPitch(title=form.title.data,content=form.content.data)
+        posts = Post(title=form.title.data,content=form.content.data,author=current_user)
         db.session.add(posts)
         db.session.commit()
         flash('your post has been created','success')
-        return render_template('index.html')
+        return redirect(url_for('main.index'))
     return render_template('create_post.html',title="New Post",form=form)
+
+
+@main.route('/post/<int:post_id>', methods=["POST"])
+@login_required
+def del_post(post_id):
+    post = Post.query.get(post_id)
+    if post.author != current_user:
+        abort(403)
+    post.delete()
+    return redirect(url_for('main.index'))
