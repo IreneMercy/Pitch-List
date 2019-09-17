@@ -2,17 +2,7 @@
 {% extends 'base.html' %}
 <div class="container-fluid">
 {% block content %}
-    <form action="/userMercy" method="POST">
-      {% if error %}
-        <p class="alert-alert-danger text-center  bg-danger error">
-          {{error}}
-        </p>
-      {% endif %}
-    <div class="container text-center login">
-      <textarea rows="6" cols="60" type="password" placeholder="Enter Password" name="password" required></textarea>
-      <br>
-      <button type="submit" class=" btn btn-btn-lg bg-warning mt-3 w-50 text-white" id="submit">Submit</button>
-    </div>
-    </form>
+  
+
 {% endblock %}
   </div>

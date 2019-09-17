@@ -2,15 +2,16 @@
 {% block content %}
   {{super()}}
   <div class="container-fluid">
-    <div class="container">
+    <div class="container pt-5">
       <div class="row">
         <div class="col-md-4">
         </div>
         <form class="mt-5" action="" method="POST">
           {{form.hidden_tag()}}
-          <div class="form-group mt-5 pt-4 card bg-dark col-md-12 create">
+          <div class="form-group  pt-4 card bg-dark col-md-12 create">
             <h3 class="border-bottom text-capitalize card-header text-center" id="cpitch">Create a pitch</h3>
             <div class="form-group card-body">
+
               {{form.category.label(class ="form-control-label text-white")}}
               {% if form.category.errors %}
                {{form.category(class="form-control form-control-lg is-invalid")}}
@@ -19,38 +20,35 @@
                     <span>{{ error }}</span>
                   {% endfor %}
               {% else %}
-                {{ form.title(class="form-control form-control-lg")}}
+                {{ form.category(class="form-control form-control-lg")}}
               {% endif %}
-
-              {{form.title.label(class ="form-control-label text-white")}}
-              {% if form.title.errors %}
-               {{form.title(class="form-control form-control-lg is-invalid")}}
-                <div class="invalid-message">
-                  {% for error in form.title.errors %}
-                    <span>{{ error }}</span>
-                  {% endfor %}
-              {% else %}
-                {{ form.title(class="form-control form-control-lg")}}
-              {% endif %}
-              
                </div>
                <div class="form-group">
-                 {{ form.content.label(class="form-control-label text-white") }}
-                  {%if form.content.errors %}
-                    {{form.content(class="form-control form-control-lg is-invalid")}}
+                 {{ form.title.label(class="form-control-label text-white") }}
+                  {%if form.title.errors %}
+                    {{form.title(class="form-control form-control-lg is-invalid")}}
                     <div class="invalid-message">
-                      {% for error in form.content.errors %}
+                      {% for error in form.title.errors %}
                         <span>{{error}}</span>
                       {% endfor %}
                     {% else %}
-                      {{form.content(class="form-control form-control-lg")}}
+                      {{form.title(class="form-control form-control-lg")}}
                   {% endif %}
-                  {{form.submit(class="btn btn-outline-warning w-100 mt-3")}}
-
+                  {{form.content.label(class ="form-control-label text-white")}}
+                  {% if form.content.errors %}
+                   {{form.content(class="form-control form-control-lg is-invalid")}}
+                    <div class="invalid-message">
+                      {% for error in form.content.errors %}
+                        <span>{{ error }}</span>
+                      {% endfor %}
+                  {% else %}
+                    {{ form.content(class="form-control form-control-lg")}}
+                  {% endif %}
+                   </div>
+                  {{form.submit(class="btn btn-outline-warning w-100 mt-3 mb-5")}}
                   </div>
                </div>
             </div>
-
           </div>
       </form>
       </div>

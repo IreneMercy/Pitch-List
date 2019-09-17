@@ -2,6 +2,8 @@ from flask import render_template, request, redirect, url_for
 from . import auth
 from app.models import User
 from flask_login import login_user,login_required, logout_user
+from ..import mail
+from flask_mail import Message
 
 @auth.route('/login', methods=['POST','GET'])
 def login():
@@ -30,7 +32,10 @@ def signup():
         email = form.get("email")
         password = form.get("password")
         confirm_password = form.get("confirm_password")
-
+        msg = Message("Hello, {{user.username}}, Thank for registering to PitchPoint",
+              sender="ijanemercy@gmail.com")
+        msg.add_recipient(email)
+        mail.send(msg)
         if username==None or password==None or email==None or password==None or confirm_password==None :
             error = "All fields are required"
             return render_template('signup.html', error=error)
