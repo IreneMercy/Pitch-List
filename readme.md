@@ -5,7 +5,7 @@
 ### Author
 ##### Irene Mercy
 ### Project Setup
-##### Fork the repository On your terminal run the command git clone "project link" On your terminal, cd Pitch-List On your terminal then run the command code. to open the project on your text editor.
+##### Fork the repository, On your terminal run the command git clone "project link" On your terminal, cd Pitch-List On your terminal then run the command code. to open the project on your text editor.
 
 ### BDD
 ##### As a user, I would like to see the pitches other people have posted.
