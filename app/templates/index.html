@@ -29,10 +29,11 @@
             <input type="submit" class="btn btn-danger ml-3" value="Delete">
           </form>
           <div class="bg-secondary text-white">
+            <h5 class="text-white">Comments</h5>
+            <hr>
             {% for comment in comments %}
               {% if post.id == comment.post_id%}
-              <h5 class="text-white">Comments</h5>
-              <hr>
+
               <p class="ml-3">~ {{comment.comment}}</p>
               <p class="ml-4">Commented by {{comment.comments.username}} on {{comment.date_posted.strftime('%Y-%m-%d')}}</p>
               {% endif %}
