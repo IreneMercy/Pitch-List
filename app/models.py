@@ -13,7 +13,6 @@ class User(UserMixin,db.Model):
     profile_pic_path = db.Column(db.String(255))
     posts = db.relationship('Post', backref='author',lazy=True)
     comment = db.relationship('Commenting', backref='comments',lazy=True)
-    liked = db.relationship('LikePitch', backref='liked',lazy='dynamic')
 
     def save(self):
         db.session.add(self)
@@ -79,9 +78,3 @@ class Commenting(db.Model):
 
     def __repr__(self):
         return f"Commenting('{self.comment}', '{self.date_posted}')"
-
-
-class LikePitch(db.Model):
-    id = db.Column(db.Integer,primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    post_id = db.Column(db.Integer,db.ForeignKey('post.id'))
