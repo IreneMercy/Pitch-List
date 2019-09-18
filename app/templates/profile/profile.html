@@ -4,7 +4,7 @@
   <div class="container bg-dark h-50">
     <div class="row profile">
       <div class="col-md-4">
-        <h3 class="text-white card-header"> {{current_user.username| capitalize}} </h3>
+        <h3 class="text-info card-header"> {{current_user.username| capitalize}} </h3>
         {% if current_user.profile_pic_path %}
           <img src="{{url_for('static', filename= user.profile_pic_path)}}" alt="" class="rounded-circle card-image" width="38%" height="40%">
         {%else%}
@@ -16,6 +16,34 @@
           <p class="text-white"> {{current_user.username| capitalize}} has no bio </p>
         {% endif %}
       </div>
+      {% for post in posts %}
+        <div class="col-md-4 mt-4 pt-4">
+          <div class="card bg-dark">
+            <div class="card-header">
+              <h4 class="text-info text-uppercase text-georgia">{{post.category}}</h4>
+              <h5 class="text-white text-capitalize"><img src="{{url_for('static', filename= current_user.profile_pic_path)}}" alt="" class="rounded-circle card-image" width="20%" height="10%">{{post.title}}</h5>
+            </div>
+            <div class="card-body">
+              <p class="text-white">{{post.content}}</p>
+              <p class="text-white">Posted on {{post.date_posted.strftime('%Y-%m-%d')}} ~<span>{{post.author.username}}</span></p>
+            </div>
+            <div class="card-footer">
+              <form class="" action="{{url_for('main.del_post', post_id = post.id)}}" method="post">
+                <i id="vote1" class="fa fa-thumbs-up fa-2x text-white"></i>
+                <i id="vote2" class="fa fa-thumbs-down fa-2x ml-2 text-white"></i>
+                <input type="submit" class="btn btn-danger ml-3" value="Delete">
+              </form>
+              {% for comment in comment_post %}
+                <p>{{comment.comment}}</p>
+              {% endfor %}
+              <form action="{{url_for('main.Comment')}}" method="POST">
+                <input id="comment" type="text" name="comment" class="w-100 border-outline-info">
+                <input type="submit" class="btn btn-info text-white ml-2 mt-2 mr-auto" value="Comment">
+              </form>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
       <div class="col-md-6 mt-2 ml-auto">
         <form action="{{url_for('main.update_pic',uname=current_user.username)}}" method="post" enctype = "multipart/form-data">
           <input type="file"  name="photo" class="form-control" required>

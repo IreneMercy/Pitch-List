@@ -1,3 +1,16 @@
+@import url('https://fonts.googleapis.com/css?family=Lobster&display=swap');
+.min{
+  font-size:30px;
+}
+.posts{
+  font-family: 'Lobster', cursive;
+}
+.intro{
+  font-family: 'Lobster', cursive;
+}
+.navbar{
+  font-family: 'Lobster', cursive;
+}
 .container-fluid{
   background-image: url(../images/animal.jpg);
   background-position:center;
@@ -12,11 +25,15 @@
 }
 .login{
   padding-top: 12%;
+  font-family: 'Lobster', cursive;
+
 }
 .login h1{
   color:orange;
   font-family: georgia;
   text-transform: uppercase;
+  font-family: 'Lobster', cursive;
+
 }
 .login p{
   color: wheat;
@@ -37,19 +54,27 @@
   text-decoration-line: none;
 }
 ::placeholder{
-  color:black;
+  color:white;
   font-size: 14px;
   margin-left:5%;
+  font-family: 'Lobster', cursive;
+
 }
 #signup{
   text-decoration-line: none;
   color:aqua;
+  font-family: 'Lobster', cursive;
+
 }
 .create h3{
   color:orange;
+  font-family: 'Lobster', cursive;
+
 }
 #cpitch{
   color:orange;
+  font-family: 'Lobster', cursive;
+
 }
 #submit{
 height:7%;
@@ -57,7 +82,7 @@ border-radius:10px;
 text-transform: uppercase;
 }
 .link{
-  font-family: georgia;
+  font-family: 'Lobster', cursive;
 }
 .welcome{
   margin-top: 5%;
@@ -65,14 +90,16 @@ text-transform: uppercase;
 .error{
   margin-top:4%;
   color:white;
+  font-family: 'Lobster', cursive;
+
 }
 .items{
-  font-family: georgia;
+  font-family: 'Lobster', cursive;
   margin-top:5%;
 }
 .profile{
   margin-top:10%;
-  font-family: georgia;
+  font-family: 'Lobster', cursive;
 }
 .pitch_post{
   padding-top:4%;

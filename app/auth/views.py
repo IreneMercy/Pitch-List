@@ -32,7 +32,7 @@ def signup():
         email = form.get("email")
         password = form.get("password")
         confirm_password = form.get("confirm_password")
-        msg = Message("Hello, {{user.username}}, Thank for registering to PitchPoint",
+        msg = Message("Hello, Thank for registering to PitchPoint",
               sender="ijanemercy@gmail.com")
         msg.add_recipient(email)
         mail.send(msg)

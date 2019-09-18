@@ -7,7 +7,7 @@ from wtforms.validators import Required
 class PostPitch(FlaskForm):
     category = TextAreaField('Category',validators = [Required()])
     title= TextAreaField('Title',validators = [Required()])
-    content= TextAreaField('Comment',validators = [Required()])
+    content= TextAreaField('Content',validators = [Required()])
     submit = SubmitField('Submit')
 
 class CommentPitch(FlaskForm):

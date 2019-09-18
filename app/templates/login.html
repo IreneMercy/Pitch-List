@@ -2,7 +2,7 @@
 
 {% block content %}
   {{super()}}
-  <div class="container-fluid">
+  <div class="container posts">
     <div class="row">
       <div class="col-md-4">
       </div>
@@ -19,13 +19,13 @@
             <div class="card-body">
               <h1 class="mt-5">Login</h1>
               <p class="text">Please fill in this form to login.</p>
-              <input class="" size="30cl" type="text" placeholder="Enter Username" name="username" required>
+              <input class="" size="28cl" type="text" placeholder="Enter Username" name="username" required>
               <br>
               <br>
-              <input size="30cl" type="password" placeholder="Enter Password" name="password" required>
+              <input size="28cl" type="password" placeholder="Enter Password" name="password" required>
             </div>
             <div class="card-footer">
-              <button type="submit" class=" btn btn-btn-lg bg-warning mt-5 w-50 text-white" id="submit">Login</button>
+              <button type="submit" class=" btn btn-btn-lg bg-warning mt-5 w-50 text-black" id="submit">Login</button>
               <p class="mt-3"> Don't have an account? <a id="signup" href="{{url_for('auth.signup')}}">Sign up here</a></p>
             </div>
           </div>

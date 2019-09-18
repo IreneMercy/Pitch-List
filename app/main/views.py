@@ -9,8 +9,8 @@ from .forms import CommentPitch, PostPitch
 @login_required
 def index():
     posts = Post.query.all()
-    comment_post = Commenting.query.all()
-    return render_template('index.html',posts = posts,comment_post=comment_post)
+    comments = Commenting.query.all()
+    return render_template('index.html',posts = posts, comments = comments)
 
 
 @main.route('/user<uname>')
@@ -70,14 +70,34 @@ def del_post(post_id):
     post.delete()
     return redirect(url_for('main.index'))
 
-@main.route('/comments', methods=['GET','POST'])
+@main.route('/comments/<int:post_id>', methods=['GET','POST'])
 @login_required
-def Comment():
-    form = CommentPitch()
-    if form.validate_on_submit():
-        comments = Commenting(comment=form.comment.data,comm=current_user)
-        db.session.add(comments)
+def Comment(post_id):
+    if request.method=='POST':
+        comment = request.form.get('comment')
+        post = Post.query.filter_by(id=post_id).first()
+        comment = Commenting(comment=comment,comments=current_user ,post_id = post.id)
+        comment.save()
+        return redirect(url_for('main.index', post=post))
+    return render_template('index.html',)
+
+
+@main.route('/view/post_id', methods=['GET','POST'])
+@login_required
+def comment_view(post_id):
+        post = Post.query.filter_by(id=post_id).first()
+        comment = Commenting.query.filter_by(post_id = post_id).all()
+        return render_template('index.html',comment = comment,post = post)
+
+
+@main.route('/like/<int:post_id>/<action>')
+@login_required
+def like_action(post_id,action):
+    post = Post.query.filter_by(id=post_id).first_or_404()
+    if action == 'like':
+        current_user.like_post(post)
         db.session.commit()
-        flash('Your comment has been posted,success')
-        return redirect(url_for('main.index'))
-    return render_template('index.html',form=form)
+    if action == 'unlike':
+        current_user.unlike_post(post)
+        db.session.commit()
+    return redirect(request.referrer)
