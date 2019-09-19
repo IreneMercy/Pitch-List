@@ -4,7 +4,7 @@ load_dotenv()
 
 class Config(object):
     DEBUG=False
-    SQLALCHEMY_DATABASE_URI='postgresql+psycopg2://joozao:sjjimo@localhost:5432/pitchlist'
+    SQLALCHEMY_DATABASE_URI=os.environ.get('DATABASE_URL')
     SECRET_KEY='sjjimo'
     UPLOADED_PHOTOS_DEST = 'app/static/images'
     MAIL_SERVER = 'smtp.gmail.com'
