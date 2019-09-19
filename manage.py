@@ -1,6 +1,6 @@
 from flask_script import Manager , Server
 from app import create_app,db
-from app.models import User,Post
+from app.models import User,Post,Commenting,Upvote,Downvote
 from flask_migrate import Migrate,MigrateCommand
 
 
