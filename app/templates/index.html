@@ -24,8 +24,8 @@
         <div class="card-footer">
 
           <form class="" action="{{url_for('main.del_post', post_id = post.id)}}" method="post">
-            <i id="vote2" class="fa fa-thumbs-up fa-2x ml-2 text-white"></i>
-            <i id="vote2" class="fa fa-thumbs-down fa-2x ml-2 text-white"></i>
+            <a class="text-white" href="{{url_for('main.upvote', post_id=post.id)}}"><i id="vote2" class="fa fa-thumbs-up fa-2x ml-2 text-white"></i>{{vote|count}}</a>
+            <a class="text-white" href="{{url_for('main.downvote', post_id=post.id)}}"><i id="vote2" class="fa fa-thumbs-down fa-2x ml-2 text-white"></i>{{downvote|count}}</a>
             <input type="submit" class="btn btn-danger ml-3" value="Delete">
           </form>
           <div class="bg-secondary text-white">

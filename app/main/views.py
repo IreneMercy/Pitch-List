@@ -1,5 +1,5 @@
 from flask import render_template, request,redirect,url_for,abort,flash
-from ..models import User, Post, Commenting
+from ..models import User, Post, Commenting, Upvote,Downvote
 from . import main
 from flask_login import login_required, current_user,logout_user
 from .. import db, photos
@@ -10,7 +10,9 @@ from .forms import CommentPitch, PostPitch
 def index():
     posts = Post.query.all()
     comments = Commenting.query.all()
-    return render_template('index.html',posts = posts, comments = comments)
+    vote = Upvote.query.all()
+    downvote=Downvote.query.all()
+    return render_template('index.html',posts = posts, comments = comments, vote=vote,downvote=downvote)
 
 
 @main.route('/user<uname>')
@@ -90,14 +92,40 @@ def comment_view(post_id):
         return render_template('index.html',comment = comment,post = post)
 
 
-@main.route('/like/<int:post_id>/<action>')
+@main.route('/like/<post_id>')
 @login_required
-def like_action(post_id,action):
-    post = Post.query.filter_by(id=post_id).first_or_404()
-    if action == 'like':
-        current_user.like_post(post)
-        db.session.commit()
-    if action == 'unlike':
-        current_user.unlike_post(post)
-        db.session.commit()
-    return redirect(request.referrer)
+def upvote(post_id):
+    user=current_user
+    if user.is_authenticated:
+        post = Post.query.filter_by(id=post_id).first()
+        upvote = Upvote.query.filter_by(user_id=user.id, post_id=post.id).first()
+        if upvote != None:
+            upvote.delete()
+            return redirect(url_for('main.index'))
+        else:
+            downvote = Downvote.query.filter_by(user_id=user.id,post_id=post.id).first()
+            if downvote != None:
+                downvote.delete()
+            upvote = Upvote(upvote=True,vote=user,like=post)
+            upvote.save()
+            return redirect(url_for('main.index'))
+    return redirect(url_for('main.index'))
+
+@main.route('/unlike/<post_id>')
+@login_required
+def downvote(post_id):
+    user=current_user
+    if user.is_authenticated:
+        post = Post.query.filter_by(id=post_id).first()
+        downvote = Downvote.query.filter_by(user_id=user.id, post_id=post.id).first()
+        if downvote != None:
+            downvote.delete()
+            return redirect(url_for('main.index'))
+        else:
+            upvote = Upvote.query.filter_by(user_id=user.id,post_id=post.id).first()
+            if upvote != None:
+                upvote.delete()
+            downvote = Downvote(downvote=True,unvote=user, unlike=post)
+            downvote.save()
+            return redirect(url_for('main.index'))
+    return redirect(url_for('main.index'))

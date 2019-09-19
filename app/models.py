@@ -13,6 +13,8 @@ class User(UserMixin,db.Model):
     profile_pic_path = db.Column(db.String(255))
     posts = db.relationship('Post', backref='author',lazy=True)
     comment = db.relationship('Commenting', backref='comments',lazy=True)
+    like = db.relationship('Upvote', backref='vote',lazy=True)
+    unlike = db.relationship('Downvote', backref='unvote',lazy=True)
 
     def save(self):
         db.session.add(self)
@@ -46,6 +48,9 @@ class Post(db.Model):
     content = db.Column(db.String(255),nullable=False)
     comment_post = db.relationship('Commenting', backref='the_comment',lazy=True)
     user_id = db.Column(db.Integer,db.ForeignKey('users.id'),nullable=False)
+    upvote = db.relationship('Upvote', backref='like',lazy=True)
+    downvote = db.relationship('Downvote', backref='unlike',lazy=True)
+
 
 
     def save(self):
@@ -78,3 +83,33 @@ class Commenting(db.Model):
 
     def __repr__(self):
         return f"Commenting('{self.comment}', '{self.date_posted}')"
+
+
+class Upvote(db.Model):
+    id = db.Column(db.Integer,primary_key=True)
+    upvote = db.Column(db.Boolean,nullable=False)
+    user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
+    post_id = db.Column(db.Integer,db.ForeignKey('post.id'))
+
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+
+
+class Downvote(db.Model):
+    id = db.Column(db.Integer,primary_key=True)
+    downvote = db.Column(db.Boolean,nullable=False)
+    user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
+    post_id = db.Column(db.Integer,db.ForeignKey('post.id'))
+
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
