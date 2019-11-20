@@ -11,7 +11,7 @@
 .navbar{
   font-family: 'Lobster', cursive;
 }
-.container-fluid{
+.container-full{
   background-image: url(../images/animal.jpg);
   background-position:center;
   height:100%;
